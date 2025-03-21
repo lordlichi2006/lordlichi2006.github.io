@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Renderer</title>
+    <title>Documentacion BD</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/languages/javascript.min.js"></script> <!-- Load specific languages -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js/styles/github-dark.min.css"> <!-- Theme -->
 </head>
 <body>
     <div id="content"></div>
 
     <script>
-        fetch('documentacion.md') // Change this to your Markdown file
+        // Configure marked to use highlight.js
+        marked.setOptions({
+            highlight: function(code, lang) {
+                return hljs.highlightAuto(code).value;
+            }
+        });
+
+        fetch('example.md')
             .then(response => response.text())
             .then(markdown => {
                 document.getElementById('content').innerHTML = marked.parse(markdown);
+                document.querySelectorAll('pre code').forEach(el => {
+                    hljs.highlightElement(el); // Apply syntax highlighting
+                });
             });
     </script>
 </body>
