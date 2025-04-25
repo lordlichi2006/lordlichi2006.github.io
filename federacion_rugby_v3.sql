@@ -28,20 +28,9 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarEquipo` (`nombre` VARCHAR(50), `fchaFunc` YEAR, `DNIEntre`INT(11) )   
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PROCEDURE` ()   
   BEGIN
-    DECLARE existe INT;
-    
-    SELECT COUNT(*) INTO existe FROM equipo WHERE Nombre_equipo = nombre;
-    
-    IF existe = 0 THEN
 
-        INSERT INTO equipo (Nombre_equipo, Año_fundacion, DNI_entrenador) VALUES (nombre, fchaFunc, DNIEntre);
-
-        SELECT CONCAT('Equipo "', nombreEquipo, '" agregado correctamente.') AS Mensaje;
-    ELSE
-        SELECT CONCAT('El equipo "', nombreEquipo, '" ya existe.') AS Mensaje;
-    END IF;
 
 END$$
 
@@ -293,7 +282,8 @@ CREATE TABLE logs (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TRIGGER modificacionTemporada
-  AFTER UPDATE OF Estado ON temporada
+  AFTER UPDATE OF Estado 
+  ON temporada
   FOR EACH ROW
 BEGIN
     INSERT INTO update_logs ( usuario, message)
