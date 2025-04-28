@@ -4,11 +4,21 @@
 [db.sql](federacion_rugby_v5.sql)
 
 ## Índice
+1. [Diagrama ER](#diagrama-entidad-relacion)
+2. [Modelo Relacional](#diagrama-modelo-relacional)
+3. [Gestión de Usuarios](#gestion-de-usuarios)
+4. [Procedimientos](#procedimientos)
+5. [Funciones](#funciones)
+6. [Vistas](#vistas)
 
-1. [Gestión de Usuarios](#gestion-de-usuarios)
-2. [Procedimientos](#procedimientos)
-3. [Funciones](#funciones)
-4. [Vistas](#vistas)
+## Diagrama Entidad relacion
+
+![](entidad-relacion.png)
+
+## Diagrama Modelo Relacional
+
+![](modelo-relacional.png)
+
 
 ## Gestion De Usuarios
 
