@@ -26,7 +26,7 @@ header {
 }
 
 header img {
-    max-width: 600px;
+    max-width: 55%;
     margin: 10px auto;
     display: block;
 }
@@ -57,6 +57,8 @@ footer a {
 }
 
 .card {
+    max-height: 500px;
+
     flex: 0 1 calc(100% - 2%);
     max-width: calc(100% - 2%);
     color: #fff;
@@ -65,37 +67,6 @@ footer a {
 
 
 
-/* 2 columns */
-@media (min-width: 981px) {
-    .card {
-        flex: 0 1 calc(50% - 2%);
-        max-width: calc(50% - 2%);
-        max-height: 300px;
-    }
-
-
-}
-
-/* 3 columns */
-@media (min-width: 1551px) {
-    .card {
-        flex: 0 1 calc(33.333% - 2%);
-        max-width: calc(33.333% - 2%);
-        max-height: 400px;
-
-    }
-}
-@media (min-width: 2600px) {
-    .card {
-        flex: 0 1 calc(25% - 2%);
-        max-width: calc(25% - 2%);
-        max-height: 700px;
-
-    }
-    .cardImage img{
-            max-height: 450px;
-    }
-}
 
 
 
@@ -109,18 +80,18 @@ footer a {
 
 .cardButtons a {
     flex: 1;
-    max-width: 155px;
     color: rgb(0, 0, 0);
 
 }
 
 .cardButtons button {
     width: 100%;
-    padding: 10px 20px;
+    padding: 20px 10px;
+
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 26px;
     background: linear-gradient(to right, #E30B81, #CD2B34, #FFAA17);
     background-size: 300% 100%;
     /* makes gradient span across all 3 cardButtons */
@@ -206,7 +177,7 @@ footer a {
 
 .goBack {
 
-    width: 10%;
+    width: 10em;
     padding: 10px 20px;
     margin: 10px;
     border: none;
@@ -221,4 +192,72 @@ footer a {
 .goBack:hover {
     filter: brightness(1.1);
     cursor: pointer;
+}
+
+/* 2 columns */
+@media (min-width: 981px) {
+    .card {
+        flex: 0 1 calc(50% - 2%);
+        max-width: calc(50% - 2%);
+        max-height: 450px;
+    }
+
+    .cardButtons button {
+        width: 80%;
+        font-size: 20px;
+        padding: 15px 10px;
+
+    }
+
+    header img {
+        max-width: 40%;
+
+    }
+
+}
+
+/* 3 columns */
+@media (min-width: 1551px) {
+    .card {
+        flex: 0 1 calc(33.333% - 2%);
+        max-width: calc(33.333% - 2%);
+        max-height: 500px;
+
+    }
+
+    .cardButtons button {
+        padding: 10px 20px;
+
+        width: 70%;
+        font-size: 16px;
+
+    }
+
+    header img {
+        max-width: 30%;
+
+    }
+
+}
+
+@media (min-width: 2600px) {
+    .card {
+        flex: 0 1 calc(25% - 2%);
+        max-width: calc(25% - 2%);
+        max-height: 700px;
+
+    }
+
+    .cardImage img {
+        max-height: 450px;
+    }
+
+    .cardButtons button {
+        font-size: 16px;
+    }
+
+    header img {
+        max-width: 25%;
+
+    }
 }
