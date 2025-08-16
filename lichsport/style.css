@@ -31,24 +31,7 @@ header img {
     display: block;
 }
 
-.cardContainer {
-    display: flex;
-    flex-wrap: wrap;
-    /* allow wrapping to new rows */
-    justify-content: center;
-    /* center items if row not full */
-    gap: 20px;
-    /* space between cards */
-}
 
-.card {
-    flex: 0 1 calc(33.333% - 20px);
-    max-width: 33.333%;
-    /* black background */
-    /* white border */
-    color: #fff;
-    box-sizing: border-box;
-}
 
 footer {
     background: linear-gradient(to right, #E30B81, #CD2B34, #FFAA17);
@@ -57,14 +40,70 @@ footer {
     font-size: 14px;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
-    color: rgb(0, 0, 0);
+    color: black;
     margin-top: auto;
 }
+
+footer a {
+    color: black
+}
+
+/* Card */
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2%;
+}
+
+.card {
+    flex: 0 1 calc(100% - 2%);
+    max-width: calc(100% - 2%);
+    color: #fff;
+    box-sizing: border-box;
+}
+
+
+
+/* 2 columns */
+@media (min-width: 981px) {
+    .card {
+        flex: 0 1 calc(50% - 2%);
+        max-width: calc(50% - 2%);
+        max-height: 300px;
+    }
+
+
+}
+
+/* 3 columns */
+@media (min-width: 1551px) {
+    .card {
+        flex: 0 1 calc(33.333% - 2%);
+        max-width: calc(33.333% - 2%);
+        max-height: 400px;
+
+    }
+}
+@media (min-width: 2600px) {
+    .card {
+        flex: 0 1 calc(25% - 2%);
+        max-width: calc(25% - 2%);
+        max-height: 700px;
+
+    }
+    .cardImage img{
+            max-height: 450px;
+    }
+}
+
+
+
 
 .cardButtons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 2%;
     -webkit-background-clip: text;
 }
 
@@ -79,7 +118,7 @@ footer {
     width: 100%;
     padding: 10px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
     background: linear-gradient(to right, #E30B81, #CD2B34, #FFAA17);
@@ -106,20 +145,80 @@ footer {
 }
 
 .cardButtons button:disabled {
-    opacity: 0.5;       
-    cursor: not-allowed; 
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .cardImage img {
-    max-height: 200px;
-    height: auto;
-    border-radius: 8px;
-    margin: 20px 0;
+    padding: 5%;
+    width: 90%;
+    max-height: 250px;
+    object-fit: contain;
 }
-.cardTop > * {
-  display: inline-block;
-  cursor:default
+
+
+.cardTop>* {
+    display: inline-block;
+    cursor: default
 }
+
 .cardTop h3 {
     color: #E84500;
+}
+
+/* Markdown Render Page*/
+.mdRender {
+    text-align: left;
+    padding: 10px 30px 30px 30px;
+    color: #ff2768;
+
+}
+
+.mdRender h1 {
+    color: #ff8717;
+    border-bottom: 2px solid #ff8717;
+
+}
+
+.mdRender h2 {
+    color: #E84500;
+    border-bottom: 2px solid #E84500;
+    padding-bottom: 4px;
+}
+
+.mdRender h3,
+.mdRender h4,
+.mdRender h5 {
+    color: #ff2833;
+    border-bottom: 2px solid #ff2833;
+    padding-bottom: 4px;
+}
+
+.mdRender a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.mdRender ul,
+.mdRender p {
+    color: #ff2768;
+}
+
+.goBack {
+
+    width: 10%;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    background: linear-gradient(to right, #E30B81, #CD2B34, #FFAA17);
+    /* makes  span across all 3 cardButtons */
+    transition: background-position 0.3s;
+}
+
+.goBack:hover {
+    filter: brightness(1.1);
+    cursor: pointer;
 }

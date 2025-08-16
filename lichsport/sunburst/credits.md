@@ -1,7 +1,7 @@
 # Credits For the LichSport Mod
 
 ### [BeamNG](https://www.beamng.com/)  
-  Original Sunburst resources (Jbeams and 3D Models) used to create the LichSport Sunburst
+  - Original Sunburst resources (Jbeams and 3D Models) used to create the LichSport Sunburst
 
 ### [Rommb](https://www.beamng.com/members/rommb.575258/)  
   - Suggested the bodykit for the LichSport Sunburst  

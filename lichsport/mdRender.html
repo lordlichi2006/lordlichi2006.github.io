@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LichSport Tuning</title>
+    <link rel="shortcut icon" href="media/lcst.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <img src="media/lcst_big_b.png" alt="Website Logo">
+    </header>
+    <section class="mdRender">
+        <a href="/lichsport/index.html"><button class="goBack"><b>Go Back</b></button></a>
+        if file isnt loaded, please reload the page :p
+
+        <github-md id="markdown-container"> 
+            Loading...
+        </github-md>
+
+    </section>
+
+    <footer>
+        <b>&copy; 2025 LordLichi, All rights reserved. Markdown Renderer by <a href="https://github.com/MarketingPipeline/Markdown-Tag">MarketingPipeline</a> </b>
+    </footer>
+
+<script>
+        const params = new URLSearchParams(window.location.search);
+        const filePath = params.get('file');
+
+        const container = document.getElementById('markdown-container');
+
+        function escapeHTML(str) {
+            return str.replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;");
+        }
+
+        if (filePath) {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error('File not found');
+                    return response.text();
+                })
+                .then(text => {
+                    // Insert raw markdown properly
+                    container.innerHTML = escapeHTML(text);
+                    // Trigger renderMarkdown() in case it was already loaded
+                    if (typeof renderMarkdown === "function") {
+                        renderMarkdown();
+                    }
+                })
+                .catch(err => {
+                    container.textContent = 'Error loading file: ' + err.message;
+                });
+        } else {
+            container.textContent = 'No file specified.';
+        }
+
+</script>
+    <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script>
+</body>
+
+</html>
