@@ -1,0 +1,125 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+h1 {
+    margin: 10px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #000000;
+    /* Dark background */
+    color: rgb(221, 221, 221);
+
+}
+
+header {
+    background: linear-gradient(to right, #E30B81, #CD2B34, #FFAA17);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+header img {
+    max-width: 600px;
+    margin: 10px auto;
+    display: block;
+}
+
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    /* allow wrapping to new rows */
+    justify-content: center;
+    /* center items if row not full */
+    gap: 20px;
+    /* space between cards */
+}
+
+.card {
+    flex: 0 1 calc(33.333% - 20px);
+    max-width: 33.333%;
+    /* black background */
+    /* white border */
+    color: #fff;
+    box-sizing: border-box;
+}
+
+footer {
+    background: linear-gradient(to right, #E30B81, #CD2B34, #FFAA17);
+
+    padding: 15px 0;
+    font-size: 14px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    color: rgb(0, 0, 0);
+    margin-top: auto;
+}
+
+.cardButtons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    -webkit-background-clip: text;
+}
+
+.cardButtons a {
+    flex: 1;
+    max-width: 155px;
+    color: rgb(0, 0, 0);
+
+}
+
+.cardButtons button {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    background: linear-gradient(to right, #E30B81, #CD2B34, #FFAA17);
+    background-size: 300% 100%;
+    /* makes gradient span across all 3 cardButtons */
+    transition: background-position 0.3s;
+}
+
+.cardButtons a:nth-child(1) button {
+    background-position: left;
+}
+
+.cardButtons a:nth-child(2) button {
+    background-position: center;
+}
+
+.cardButtons a:nth-child(3) button {
+    background-position: right;
+}
+
+.cardButtons button:hover:not(:disabled) {
+    filter: brightness(1.1);
+    cursor: pointer;
+}
+
+.cardButtons button:disabled {
+    opacity: 0.5;       
+    cursor: not-allowed; 
+}
+
+.cardImage img {
+    max-height: 200px;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+.cardTop > * {
+  display: inline-block;
+  cursor:default
+}
+.cardTop h3 {
+    color: #E84500;
+}
