@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="menu">
+    <h1>Manual Docker</h1>
+
+    <a href="mdRender.html?file=comandos.md"><b>Comandos Comunes</b></a>
+    <a href="mdRender.html?file=dockerfiles.md"><b>Comandos dockerfiles</b></a>
+    <a href="mdRender.html?file=network.md"><b>Comandos para Redes</b></a>
+    <a href="mdRender.html?file=volumenes.md"><b>Comandos para Volumenes</b></a>
+    <button id="downloadAll" onclick="downloadAllMarkdowns()"><b>Descargar Manual en Markdown</b></button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script>
+        async function downloadAllMarkdowns() {
+            const files = [
+                'comandos.md',
+                'dockerfiles.md',
+                'network.md',
+                'volumenes.md'
+            ];
+            const zip = new JSZip();
+
+            try {
+                for (const file of files) {
+                    const response = await fetch(file);
+                    if (!response.ok) throw new Error(`Failed to fetch ${file}`);
+                    const text = await response.text();
+                    zip.file(file, text);
+                }
+
+                const content = await zip.generateAsync({ type: 'blob' });
+                saveAs(content, 'docker_manual.zip');
+            } catch (error) {
+                alert('Error creating ZIP file: ' + error.message);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
