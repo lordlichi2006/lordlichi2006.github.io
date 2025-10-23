@@ -72,7 +72,8 @@ footer a:hover {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.menu a, .menu button {
+.menu a,
+.menu button {
     display: block;
     background-color: #3a3a3a;
     color: #ffffff;
@@ -83,13 +84,18 @@ footer a:hover {
     border-radius: 5px;
     font-size: 1.1em;
     text-align: center;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+    border: none; /* optional for buttons */
+    cursor: pointer; /* makes buttons feel clickable */
 }
 
-.menu a:hover,.menu button {
+/* Proper hover rule */
+.menu a:hover,
+.menu button:hover {
     background-color: #4a4a4a;
     color: #4da8ff;
 }
+
 
 /* Scrollbar styles for WebKit-based browsers (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
