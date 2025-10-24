@@ -18,6 +18,8 @@ Establece variables de entorno dentro del contenedor.
 #### COPY
 Copia archivos o directorios desde el sistema de archivos local al contenedor.
 
+Hay que usar ```./Archivo``` o ```Archivo``` para usar rutas relativas, si usas ```/Archivo``` intentara acceder a ```C:/Archivo```
+
 #### ADD
 Similar a COPY, pero también descomprime archivos tar y permite URLs como origen.
 
