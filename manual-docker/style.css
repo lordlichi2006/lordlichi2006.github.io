@@ -36,7 +36,7 @@ body {
     border-radius: 5px;
     color: #d0d0d0;
 }
-.language-bash{
+.language-bash,.language-dockerfile{
     background-color: #1a1a1a !important;
     border-color: #1a1a1a !important;
     color: lightgreen !important;

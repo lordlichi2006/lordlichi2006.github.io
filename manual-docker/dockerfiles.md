@@ -49,29 +49,29 @@ Define instrucciones que se ejecutan cuando la imagen se usa como base para otra
 
 ```dockerfile
 # Imagen base desde la cual se construirá el contenedor
-FROM <imagen_base>
+FROM [imagen_base]
 
 # Establecer el directorio de trabajo dentro del contenedor
-WORKDIR <directorio_de_trabajo>
+WORKDIR [directorio_de_trabajo]
 
 # Copiar archivos necesarios al contenedor
-COPY <origen> <destino>
+COPY [origen] [destino]
 
 # Ejecutar comandos para instalar dependencias o preparar el entorno
-RUN <comando_para_instalar_o_configurar>
+RUN [comando_para_instalar_o_configurar]
 
 # Copiar el resto de los archivos del proyecto (si aplica)
-COPY <origen> <destino>
+COPY [origen] [destino]
 
 # Especificar variables de entorno (opcional)
-ENV <nombre_variable>=<valor>
+ENV [nombre_variable]=[valor]
 
 # Exponer el puerto que utilizará el contenedor (opcional)
-EXPOSE <puerto>
+EXPOSE [puerto]
 
 # Definir el comando o proceso principal que se ejecutará al iniciar el contenedor
-CMD [<comando_principal>]
+CMD [[comando_principal]]
 
 # O definir una instrucción alternativa de ejecución (opcional)
-ENTRYPOINT [<comando_entrypoint>]
+ENTRYPOINT [[comando_entrypoint]]
 ```
