@@ -45,27 +45,33 @@ Especifica un comando para verificar la salud del contenedor.
 #### ONBUILD
 Define instrucciones que se ejecutan cuando la imagen se usa como base para otra.
 
-## Ejemplo de Dockerfile
+## Ejemplo de Estructura Dockerfile
 
 ```dockerfile
-# Usar una imagen base de Node.js
-FROM node:16
+# Imagen base desde la cual se construirá el contenedor
+FROM <imagen_base>
 
-# Establecer el directorio de trabajo
-WORKDIR /app
+# Establecer el directorio de trabajo dentro del contenedor
+WORKDIR <directorio_de_trabajo>
 
-# Copiar package.json y package-lock.json
-COPY package*.json ./
+# Copiar archivos necesarios al contenedor
+COPY <origen> <destino>
 
-# Instalar dependencias
-RUN npm install
+# Ejecutar comandos para instalar dependencias o preparar el entorno
+RUN <comando_para_instalar_o_configurar>
 
-# Copiar el resto de los archivos
-COPY . .
+# Copiar el resto de los archivos del proyecto (si aplica)
+COPY <origen> <destino>
 
-# Exponer el puerto 3000
-EXPOSE 3000
+# Especificar variables de entorno (opcional)
+ENV <nombre_variable>=<valor>
 
-# Definir el comando para iniciar la aplicación
-CMD ["npm", "start"]
+# Exponer el puerto que utilizará el contenedor (opcional)
+EXPOSE <puerto>
+
+# Definir el comando o proceso principal que se ejecutará al iniciar el contenedor
+CMD [<comando_principal>]
+
+# O definir una instrucción alternativa de ejecución (opcional)
+ENTRYPOINT [<comando_entrypoint>]
 ```
