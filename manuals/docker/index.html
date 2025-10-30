@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Docker</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+</head>
+
+<body class="menu">
+    <h1>Manual Docker</h1>
+
+    <a href="../renderMarkdown.html?file=docker/comandos.md&return=docker/index.html"><b>Comandos Comunes</b></a>
+    <a href="../renderMarkdown.html?file=docker/dockerfiles.md&return=docker/index.html"><b>Comandos dockerfiles</b></a>
+    <a href="../renderMarkdown.html?file=docker/network.md&return=docker/index.html"><b>Comandos para Redes</b></a>
+    <a href="../renderMarkdown.html?file=docker/volumenes.md&return=docker/index.html"><b>Comandos para Volumenes</b></a>
+    <h3>Opciones</h3>
+    <a href="../index.html"><b>Volver Al Inicio</b></a>
+
+    <button id="downloadAll" onclick="downloadDockerManual()"><b>Descargar Manual en Markdown</b></button>
+    <!-- Librerías externas -->
+    <script src="../libs/jszip.min.js"></script>
+    <script src="../libs/FileSaver.min.js"></script>
+    <script src="../main.js"></script>
+
+    <!-- Script reutilizable -->
+    <script src="../main.js"></script>
+
+    <script>
+        function downloadDockerManual() {
+            const files = [
+                'comandos.md',
+                'dockerfiles.md',
+                'network.md',
+                'volumenes.md'
+            ];
+            downloadFiles(files, 'docker_manual.zip');
+        }
+    </script>
+</body>
+
+</html>

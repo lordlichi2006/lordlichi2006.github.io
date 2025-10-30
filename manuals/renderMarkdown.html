@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manual</title>
+    <link rel="stylesheet" href="style.css"> <!-- Ajusta si necesitas un CSS global -->
+</head>
+
+<body>
+    <section class="mdRender">
+        <a id="backLink" href="index.html">
+            <button class="goBack"><b>Go Back</b></button>
+        </a>
+        <p style="font-size: small;">Si te sale <b>Error: Showdon is not defined</b> recarga la pagina.</p>
+        <github-md id="markdown-container">
+            Loading...
+        </github-md>
+    </section>
+
+    <footer>
+        <b>&copy; 2025 LordLichi, Todos los derechos reservados. Renderer de markdown por
+            <a href="https://github.com/MarketingPipeline/Markdown-Tag">MarketingPipeline</a></b>
+    </footer>
+
+    <!-- Librerías locales (una sola vez) -->
+    <script src="libs/jszip.min.js"></script>
+    <script src="libs/FileSaver.min.js"></script>
+    <script src="libs/markdown-tag-GitHub.js"></script>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const file = params.get('file');
+            const returnUrl = params.get('return') || 'index.html'; // fallback
+
+            // Actualizar enlace "Go Back"
+            const backLink = document.getElementById('backLink');
+            backLink.href = returnUrl;
+
+            // Cargar Markdown
+            if (file) {
+                renderMarkdownFile(file);
+            } else {
+                document.getElementById('markdown-container').textContent = 'No file specified.';
+            }
+        });
+    </script>
+</body>
+
+</html>
