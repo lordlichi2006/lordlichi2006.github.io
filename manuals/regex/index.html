@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Regex</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+</head>
+
+<body class="menu">
+    <h1>Manual Regex</h1>
+
+    <a href="../renderMarkdown.html?file=regex/manual.md&return=regex/index.html"><b>Documentacion General</b></a>
+    <h3>Opciones</h3>
+    <a href="../index.html"><b>Volver Al Inicio</b></a>
+
+    <button id="downloadAll" onclick="downloadPHPManual()"><b>Descargar Manual en Markdown</b></button>
+    <!-- Librerías externas -->
+    <script src="../libs/jszip.min.js"></script>
+    <script src="../libs/FileSaver.min.js"></script>
+    <script src="../main.js"></script>
+
+    <!-- Script reutilizable -->
+    <script src="../main.js"></script>
+
+    <script>
+        function downloadPHPManual() {
+            const files = [
+                'manual.md',
+            ];
+            downloadFiles(files, 'regex_manual.zip');
+        }
+    </script>
+</body>
+
+</html>
