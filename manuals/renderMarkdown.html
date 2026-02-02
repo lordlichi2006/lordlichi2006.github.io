@@ -1,28 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Manual</title>
-    <link rel="stylesheet" href="style.css"> <!-- Ajusta si necesitas un CSS global -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Ajusta si necesitas un CSS global -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  </head>
 
-<body>
+  <body>
     <section class="mdRender">
-        <a id="backLink" href="index.html">
-            <button class="goBack"><b>Go Back</b></button>
+      <div class="mdRenderMenu">
+        <a id="backLink" href="index.html" style="text-decoration: none">
+          <button class="mdRenderBtn"><b>Go Back</b></button>
         </a>
-        <p style="font-size: small;">Si te sale <b>Error loading file: showdown is not defined</b> recarga la pagina.</p>
-        <github-md id="markdown-container">
-            Loading...
-        </github-md>
+      </div>
+
+      <p class="mdShowdown">
+        Si te sale <b>Error loading file: showdown is not defined</b>
+        <button class="mdRenderBtnReload" onclick="window.location.reload()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <path
+              fill="currentColor"
+              d="M500.7 138.7L512 149.4L512 96C512 78.3 526.3 64 544 64C561.7 64 576 78.3 576 96L576 224C576 241.7 561.7 256 544 256L416 256C398.3 256 384 241.7 384 224C384 206.3 398.3 192 416 192L463.9 192L456.3 184.8C456.1 184.6 455.9 184.4 455.7 184.2C380.7 109.2 259.2 109.2 184.2 184.2C109.2 259.2 109.2 380.7 184.2 455.7C259.2 530.7 380.7 530.7 455.7 455.7C463.9 447.5 471.2 438.8 477.6 429.6C487.7 415.1 507.7 411.6 522.2 421.7C536.7 431.8 540.2 451.8 530.1 466.3C521.6 478.5 511.9 490.1 501 501C401 601 238.9 601 139 501C39.1 401 39 239 139 139C238.9 39.1 400.7 39 500.7 138.7z"
+            />
+          </svg>
+          recarga
+        </button>
+        la pagina.
+      </p>
+
+      <github-md id="markdown-container"> Loading... </github-md>
     </section>
 
     <footer>
-        <b>&copy; 2025 LordLichi, Todos los derechos reservados. Renderer de markdown por
-            <a href="https://github.com/MarketingPipeline/Markdown-Tag">MarketingPipeline</a></b>
+      <b
+        >&copy; 2025 LordLichi, Todos los derechos reservados. Renderer de
+        markdown por
+        <a href="https://github.com/MarketingPipeline/Markdown-Tag"
+          >MarketingPipeline</a
+        ></b
+      >
     </footer>
 
     <!-- Librerías locales (una sola vez) -->
@@ -31,23 +50,23 @@
     <script src="libs/markdown-tag-GitHub.js"></script>
     <script src="main.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const params = new URLSearchParams(window.location.search);
-            const file = params.get('file');
-            const returnUrl = params.get('return') || 'index.html'; // fallback
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const file = params.get("file");
+        const returnUrl = params.get("return") || "index.html"; // fallback
 
-            // Actualizar enlace "Go Back"
-            const backLink = document.getElementById('backLink');
-            backLink.href = returnUrl;
+        // Actualizar enlace "Go Back"
+        const backLink = document.getElementById("backLink");
+        backLink.href = returnUrl;
 
-            // Cargar Markdown
-            if (file) {
-                renderMarkdownFile(file);
-            } else {
-                document.getElementById('markdown-container').textContent = 'No file specified.';
-            }
-        });
+        // Cargar Markdown
+        if (file) {
+          renderMarkdownFile(file);
+        } else {
+          document.getElementById("markdown-container").textContent =
+            "No file specified.";
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>

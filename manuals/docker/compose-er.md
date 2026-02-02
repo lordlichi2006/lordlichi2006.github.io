@@ -1,18 +1,11 @@
 # Guía Completa: Docker Compose
 
-## Tabla de Contenidos
-- [Ejemplo 1: Stack LEMP (Nginx + PHP-FPM + MySQL)](#ejemplo-1-stack-lemp-nginx--php-fpm--mysql)
-- [Ejemplo 2: Balanceo de Carga (Nginx + Node.js + MongoDB)](#ejemplo-2-balanceo-de-carga-nginx--nodejs--mongodb)
-- [Comandos Esenciales](#comandos-esenciales)
-- [Buenas Prácticas](#buenas-prácticas)
-
----
 
 ## Ejemplo 1: Stack LEMP (Nginx + PHP-FPM + MySQL)
 
 ###  Arquitectura
 
-```
+```powershell
 ┌─────────────────┐
 │   Navegador     │
 │   :8080         │
@@ -48,7 +41,7 @@
 
 ###  Estructura del Proyecto
 
-```
+```powershell
 proyecto/
 ├── docker-compose.yml
 ├── nginx/
@@ -273,7 +266,7 @@ docker compose logs -f
 
 ###  Arquitectura
 
-```
+```powershell
                  ┌──────────────┐
                  │  Navegador   │
                  │   :8080      │
@@ -309,7 +302,7 @@ docker compose logs -f
 
 ###  Estructura del Proyecto
 
-```
+```powershell
 proyecto/
 ├── docker-compose.yml
 ├── nginx/
@@ -633,7 +626,7 @@ docker system prune -a --volumes
 ## Buenas Prácticas
 
 1. **Usa `.env` para configuración**:
-   ```env
+   ```powershell
    # .env
    MYSQL_ROOT_PASSWORD=mi_password_seguro
    APP_PORT=8080
@@ -670,7 +663,7 @@ docker system prune -a --volumes
    ```
 
 4. **Usa `.dockerignore`**:
-   ```
+   ```powershell
    node_modules/
    .git/
    .env
