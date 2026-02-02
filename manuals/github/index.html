@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual GitHub Actions</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+</head>
+
+<body class="menu">
+    <h1>Manual GitHub Actions</h1>
+
+    <a href="../renderMarkdown.html?file=github/actions-er.md&return=github/index.html"><b>GitHub Actions </b></a>
+    <a href="../renderMarkdown.html?file=github/actions-ub.md&return=github/index.html"><b>GitHub Actions [Unai]</b></a>
+    <a href="../renderMarkdown.html?file=github/actions-aa.md&return=github/index.html"><b>GitHub Actions [Asier]</b></a>
+
+    <h3>Opciones</h3>
+    <a href="../index.html"><b>Volver Al Inicio</b></a>
+
+    <button id="downloadAll" onclick="downloadGithubManual()"><b>Descargar Manual en Markdown</b></button>
+    <!-- Librerías externas -->
+    <script src="../libs/jszip.min.js"></script>
+    <script src="../libs/FileSaver.min.js"></script>
+    <script src="../main.js"></script>
+
+    <!-- Script reutilizable -->
+    <script src="../main.js"></script>
+
+    <script>
+        function downloadGithubManual() {
+            const files = [
+                'actions-er.md',
+                'actions-ub.md',
+                'actions-aa.md',
+            ];
+            downloadFiles(files, 'github_manual.zip');
+        }
+    </script>
+</body>
+
+</html>
