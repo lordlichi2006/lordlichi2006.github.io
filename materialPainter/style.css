@@ -1,17 +1,15 @@
-
 body,
 html {
   background: linear-gradient(160deg, var(--bgColT) 30%, var(--bgColB) 100%);
   width: 100%;
   height: 100%;
 }
-main{
-    display: flex;
+main {
+  display: flex;
   justify-content: center;
   gap: 2rem;
   padding: 2rem 1rem;
   height: 100%;
-
 }
 h1 {
   text-transform: uppercase;
@@ -22,6 +20,9 @@ h4 {
   text-transform: capitalize;
   letter-spacing: 0.1rem;
   user-select: none;
+}
+hr {
+  border: 1px solid var(--borderCol);
 }
 ll06-copyright {
   position: absolute;
@@ -313,8 +314,7 @@ ll06-copyright {
 .log p {
   font-size: x-small;
   color: var(--textCol2);
-  text-shadow:
-    0 0 3px var(--shadowCol),
+  text-shadow: 0 0 3px var(--shadowCol);
 }
 .log p .time {
   font-size: 7px;

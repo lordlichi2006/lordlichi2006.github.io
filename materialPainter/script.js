@@ -1,5 +1,5 @@
 // define outside
-let exportMaterialsBTN,
+let exportMaterialsBTN,exportMaterialsAllBTN,
   exportColorsBTN,
   selectAll,
   deselectAll,
@@ -13,6 +13,8 @@ let exportMaterialsBTN,
   colorsInfoText,
   materialsInfoText,
   logsElement,
+  clearMaterialsBTN,
+  clearColorsBTN,
   colorVariantsList;
 
 let activeColor = "#777777";
@@ -22,6 +24,7 @@ let logs = [];
 // assign inside onload once DOM is ready
 window.onload = () => {
   exportMaterialsBTN = document.getElementById("exportMaterials");
+  exportMaterialsAllBTN = document.getElementById("exportMaterialsAll");
   exportColorsBTN = document.getElementById("exportColors");
   selectAll = document.getElementById("selectAll");
   deselectAll = document.getElementById("deselectAll");
@@ -35,6 +38,9 @@ window.onload = () => {
   colorVariantsList = document.getElementById("colorVariantsList");
   colorsInfoText = document.getElementById("colorsInfoText");
   materialsInfoText = document.getElementById("materialsInfoText");
+  clearMaterialsBTN = document.getElementById("clearMaterials");
+  clearColorsBTN = document.getElementById("clearColors");
+
   logsElement = document.getElementById("logs");
   log("Window loaded.");
 
@@ -51,7 +57,7 @@ window.onload = () => {
   }
   const colorVariantsJson = loadFromStorage("colorVariants");
   if (colorVariantsJson) {
-    populateColorListFromFile(colorVariantsJson);
+    populateColorListFromStorage(colorVariantsJson);
     filename = localStorage.getItem("colorVariants_filename");
     colorsInfoText.innerText = `${filename} loaded.`;
     log(`${filename} loaded.`);
@@ -62,6 +68,9 @@ window.onload = () => {
   });
   exportMaterialsBTN.addEventListener("click", function (e) {
     exportMaterials();
+  });
+  exportMaterialsAllBTN.addEventListener("click", function (e) {
+    exportMaterials(true);
   });
   selectAll.addEventListener("click", function (e) {
     toggleAllMaterials(true);
@@ -81,6 +90,15 @@ window.onload = () => {
   colorEditorPicker.addEventListener("input", (e) => {
     activeColor = e.target.value;
     updateColorEditorColors();
+  });
+
+  clearMaterialsBTN.addEventListener("click", function (e) {
+    removeFromStorage("sourceMaterial");
+    populateMaterialList({})
+  });
+  clearColorsBTN.addEventListener("click", function (e) {
+    removeFromStorage("colorVariants");
+    populateColorList()
   });
   // Default Blank State
   resetColorEditor();
@@ -168,7 +186,7 @@ function registerFileInput(id, storageKey) {
         log(`${filename} loaded.`);
       }
       if (storageKey === "colorVariants") {
-        populateColorList(result);
+        populateColorListFromStorage(result);
         filename = localStorage.getItem("colorVariants_filename");
         colorsInfoText.innerText = `${filename} loaded.`;
         log(`${filename} loaded.`);
@@ -177,6 +195,11 @@ function registerFileInput(id, storageKey) {
 
     reader.readAsText(upload.files[0]);
   });
+}
+
+function removeFromStorage(storageKey) {
+  localStorage.removeItem(storageKey);
+  localStorage.removeItem(`${storageKey}_filename`);
 }
 
 function loadFromStorage(storageKey) {
@@ -260,7 +283,7 @@ function toggleAllMaterials(checked) {
 }
 
 /* Colors*/
-function populateColorListFromFile(materialsJSON) {
+function populateColorListFromStorage(materialsJSON) {
   setSelectedMaterials(materialsJSON.variants);
 
   // clear existing entries
@@ -268,6 +291,7 @@ function populateColorListFromFile(materialsJSON) {
   // Populate the color list
   colorList = Object.entries(materialsJSON.colors);
   populateColorList();
+  
 }
 
 function populateColorList() {
@@ -344,7 +368,7 @@ function updateColorEditorColors() {
 
 // Export Related
 
-function exportMaterials() {
+function exportMaterials(combine) {
   const materialsToGenerateKey = getSelectedMaterials();
   console.log(materialsToGenerateKey);
   if (materialsToGenerateKey.length === 0) {
@@ -354,7 +378,7 @@ function exportMaterials() {
   const sourceMaterials = loadFromStorage("sourceMaterial");
   const colorVariantsJson = loadFromStorage("colorVariants");
 
-  let outputJSON = {};
+  let outputJSON = combine ?  sourceMaterials : {}
 
   Object.entries(sourceMaterials)
     .filter(([key]) => materialsToGenerateKey.includes(key))
@@ -384,7 +408,7 @@ function exportColors() {
     variants: getSelectedMaterials(),
     colors: colors,
   };
-  downloadJSON(colorsFile,"export.colors.json")
+  downloadJSON(colorsFile, "export.colors.json");
 }
 
 function createMaterialVariant(materialJSON, variantHex, variantName) {
