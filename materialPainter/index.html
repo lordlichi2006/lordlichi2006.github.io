@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Material Painter</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="../common/favicon.webp" type="image/x-icon">
+    <script src="script.js"></script>
+    <script src="../common/common.js"></script>
+    <link rel="stylesheet" href="../common/common.css" />
+  </head>
+  <body>
+    <main>
+    <div class="box">
+      <h1>materials</h1>
+
+      <label class="btn" for="materialsUpload">
+        <span>Upload Materials</span>
+        <input
+          type="file"
+          id="materialsUpload"
+          name="materialsUpload"
+          accept=".materials.json"
+        />
+      </label>
+
+      <h4>select materials</h4>
+
+      <div class="box" id="sourceMaterialList"></div>
+      <div class="transparentBox row">
+        <button class="btn" id="selectAll">Select&nbsp;All</button>
+        <button class="btn" id="deselectAll">Deselect&nbsp;All</button>
+      </div>
+      <p class="infoText" id="materialsInfoText">No materials file loaded.</p>
+    </div>
+
+    <div class="box">
+      <h1>colors</h1>
+
+      <label class="btn" for="colorsUpload">
+        <span>Upload Colors</span>
+        <input
+          type="file"
+          id="colorsUpload"
+          name="colorsUpload"
+          accept=".colors.json"
+        />
+      </label>
+
+      <h4>color list</h4>
+
+      <div class="box" id="colorVariantsList"></div>
+
+      <p class="infoText" id="colorsInfoText">No colors file loaded.</p>
+    </div>
+    <div class="transparentBox col">
+      <div class="box">
+        <h1>color editor</h1>
+        <div class="colorEditor">
+          <div>
+            <label
+              for="colorPicker"
+              class="colorBox"
+              id="colorEditorBox"
+            ></label>
+            <input type="color" id="colorPicker" />
+            <input type="text" id="colName" />
+          </div>
+          <div>
+            <button class="btn" id="colorEditorNew">+</button>
+            <button class="btn" id="colorEditorRemove">x</button>
+            <button class="btn" id="colorEditorSave">✓</button>
+          </div>
+        </div>
+        <div class="box shadingBallBox">
+          <div class="shadingBall"><div class="shadingBallChrome"></div></div>
+          <div class="shadingBall"><div class="shadingBallPaint"></div></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <h1>Export</h1>
+
+        <button class="btn" id="exportMaterials">Export Materials</button>
+        <button class="btn" id="exportColors">Export Colors</button>
+      </div>
+    </div>
+    <div class="box log">
+      <h1>Log</h1>
+      <div id="logs"></div>
+    </div>
+    </main>
+
+    <ll06-copyright></ll06-copyright>
+    <ll06-watermark></ll06-watermark>
+  </body>
+
+  <script>
+    </script>
+</html>
