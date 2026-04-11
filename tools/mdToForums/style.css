@@ -1,0 +1,18 @@
+
+
+
+.transparentBox.col > :nth-child(2) {
+  height: 100%;
+}
+.transparentBox.col {
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.box.output {
+    height: 100%;
+    width: 30vw;
+    overflow: auto;
+    white-space: pre;
+    font-size: x-small;
+}

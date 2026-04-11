@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarkdownNG</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../tools.css" />
+    <link rel="shortcut icon" href="../../common/favicon.webp" type="image/x-icon"/>
+
+    <script src="../../common/common.js"></script>
+    <script src="../tools.js"></script>
+
+  </head>
+
+  <body>
+    <main>
+      <div class="transparentBox col">
+        <div class="box">
+          <h1>MarkdownNG</h1>
+
+          <label class="btn" for="fileInput">
+            <span>Upload Markdown</span>
+            <input type="file" id="fileInput" name="fileInput" accept=".md" />
+          </label>
+
+          <button id="convertBtn" class="btn">Convert</button>
+
+          <p class="infoText" id="mdFileInfo">No markdown file loaded.</p>
+        </div>
+
+        <div class="box log">
+          <h1>Log</h1>
+          <div id="logs"></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <h1>Output</h1>
+
+        <span id="outputBox" class="box output">Output Goes Here...</span>
+        <button id="clipboard" class="btn">Copy To Clipboard</button>
+      </div>
+    </main>
+
+    <ll06-copyright></ll06-copyright>
+    <ll06-watermark></ll06-watermark>
+  </body>
+  <script>
+    let logsElement;
+    let logs = [];
+
+    window.onload = () => {
+      logsElement = document.getElementById("logs");
+      log("Window loaded.");
+
+      handleFiles();
+      handleConveresion();
+      handleClipboard();
+    };
+
+    function handleFiles() {
+      const input = document.getElementById("fileInput");
+      const info = document.getElementById("mdFileInfo");
+
+      input.addEventListener("change", function () {
+        // if nothing was uploaded ?? hrmm yes imma click the upload file button and not upload anything
+        if (input.files.length === 0) return;
+
+        let reader = new FileReader();
+
+        // save file to localstorage
+        reader.addEventListener("load", function () {
+          try {
+            const data = JSON.stringify({
+              fileName: input.files[0].name,
+              content: reader.result,
+            });
+            localStorage.setItem("file", data);
+            info.innerText = `File '${input.files[0].name}' loaded.`;
+            log(`Markdown file '${input.files[0].name}' stored. `);
+          } catch (error) {
+            error(`Unexpected error: ${error}`, true);
+          }
+        });
+
+        reader.readAsText(input.files[0]);
+      });
+
+      const data = JSON.parse(localStorage.getItem("file") || null);
+      if (data) {
+        info.innerText = `File '${data.fileName}' loaded.`;
+        log("Loading stored file.")
+        outputParsed(data);
+      }
+    }
+
+    function handleConveresion() {
+      const btn = document.getElementById("convertBtn");
+
+      btn.addEventListener("click", function () {
+        // get stored data
+        const data = JSON.parse(localStorage.getItem("file") || null);
+
+        // brih why would you click convert without uploading file smh
+        if (!data) {
+          log("No Markdown file found to process.", true);
+          return;
+        }
+        // passing this to another function because it look ugly all in here
+        outputParsed(data);
+      });
+    }
+    function outputParsed(data) {
+      const output = document.getElementById("outputBox");
+
+      parsed = parseMarkdown(data.content);
+      log(`File '${data.fileName}' parsed.`);
+      output.innerText = parsed;
+    }
+
+    function handleClipboard() {
+      const btn = document.getElementById("clipboard");
+      const text = document.getElementById("outputBox");
+
+      btn.addEventListener("click", function () {
+        navigator.clipboard.writeText(text.innerText);
+        log("Output saved to clipboard.");
+      });
+    }
+
+    function parseMarkdown(markdown) {
+      let parsed = [];
+      let inList = false;
+      let listOrdered = false;
+
+      markdown = markdown.split("\n");
+      markdown.forEach((line, i) => {
+        const isUnordered = /^[-*+] /.test(line);
+        const isOrdered = /^\d+\. /.test(line);
+        const nextIsListItem = /^([-*+]|\d+\.) /.test(markdown[i + 1] ?? "");
+
+        // List open
+        if (!inList && (isUnordered || isOrdered)) {
+          inList = true;
+          listOrdered = isOrdered;
+          parsed.push(listOrdered ? "[LIST=1]" : "[LIST]");
+        }
+
+        if (isUnordered) {
+          line = `[*]${line.slice(2).trim()}`;
+        } else if (isOrdered) {
+          line = `[*]${line.replace(/^\d+\. /, "").trim()}`;
+
+          // Headings
+        } else if (line.startsWith("######")) {
+          line = `[B][SIZE=1]${line.slice(6).trim()}[/SIZE][/B]`;
+        } else if (line.startsWith("#####")) {
+          line = `[B][SIZE=2]${line.slice(5).trim()}[/SIZE][/B]`;
+        } else if (line.startsWith("####")) {
+          line = `[B][SIZE=3]${line.slice(4).trim()}[/SIZE][/B]`;
+        } else if (line.startsWith("###")) {
+          line = `[B][SIZE=5]${line.slice(3).trim()}[/SIZE][/B]`;
+        } else if (line.startsWith("##")) {
+          line = `[B][SIZE=6]${line.slice(2).trim()}[/SIZE][/B]`;
+        } else if (line.startsWith("#")) {
+          line = `[B][SIZE=7]${line.slice(1).trim()}[/SIZE][/B]`;
+
+          // Blockquote
+        } else if (line.startsWith(">")) {
+          line = `[QUOTE]${line.slice(1).trim()}[/QUOTE]`;
+
+          // Horizontal rule
+        } else if (/^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())) {
+          line = `[HR][/HR]`;
+
+          // Empty line
+        } else if (line.trim() === "") {
+          line = "";
+
+          // Paragraph
+        } else {
+          line = line;
+        }
+
+        // Inline: bold+italic
+        line = line.replace(/\*\*\*(.+?)\*\*\*/g, "[B][I]$1[/I][/B]");
+        // Inline: bold
+        line = line.replace(/\*\*(.+?)\*\*/g, "[B]$1[/B]");
+        // Inline: italic
+        line = line.replace(/\*(.+?)\*/g, "[I]$1[/I]");
+        // Inline: strikethrough
+        line = line.replace(/~~(.+?)~~/g, "[S]$1[/S]");
+        // Inline: inline code
+        line = line.replace(
+          /`([^`]+)`/g,
+          "[B][FONT=Courier New][COLOR=rgb(123, 52, 186)]$1[/COLOR][/FONT][/B]",
+        );
+        // Inline: images
+        line = line.replace(
+          /!\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g,
+          "[IMG]$2[/IMG]",
+        );
+        // Inline: links
+        line = line.replace(
+          /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+          "[URL=$2]$1[/URL]",
+        );
+
+        parsed.push(line);
+
+        // List close
+        if (inList && !nextIsListItem) {
+          parsed.push("[/LIST]");
+          inList = false;
+          listOrdered = false;
+        }
+      });
+
+      return parsed.join("\n");
+    }
+  </script>
+</html>

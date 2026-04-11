@@ -1,53 +1,5 @@
-body,
-html {
-  background: linear-gradient(160deg, var(--bgColT) 30%, var(--bgColB) 100%);
-  width: 100%;
-  height: 100%;
-}
-main {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem 1rem;
-  height: 100%;
-}
-h1 {
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  user-select: none;
-}
-h4 {
-  text-transform: capitalize;
-  letter-spacing: 0.1rem;
-  user-select: none;
-}
-hr {
-  border: 1px solid var(--borderCol);
-}
-ll06-copyright {
-  position: absolute;
-  bottom: 3px;
-  left: 3px;
-  font-size: small;
-  color: var(--textCol2);
-}
 
 /*Box Used For Most Stuff*/
-.box {
-  border-radius: 0.75rem;
-  background: linear-gradient(160deg, var(--boxColT) 30%, var(--boxColB) 100%);
-
-  border: 1px solid var(--borderCol);
-  display: flex;
-
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
-  box-shadow:
-    0px 8px 14px var(--shadowCol),
-    inset 8px 8px 24px var(--insetCol),
-    inset -8px -8px 24px #0002;
-}
 .box.row,
 .transparentBox.row {
   gap: 1rem;
@@ -65,64 +17,6 @@ ll06-copyright {
 }
 .transparentBox.col > * {
   height: 50%;
-}
-
-.infoText {
-  margin-top: auto;
-  color: var(--textCol2);
-}
-
-/* ============================================================
-    File Upload Buttons
-   ============================================================ */
-.btn {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 3rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--borderCol);
-  background: linear-gradient(170deg, var(--hoverT) 40%, var(--hoverB) 100%);
-  cursor: pointer;
-  z-index: 0;
-  overflow: hidden;
-  box-shadow:
-    0px 4px 14px var(--shadowCol),
-    inset 8px 8px 24px var(--insetCol),
-    inset -8px -8px 24px #0002;
-}
-
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  background: linear-gradient(170deg, var(--hoverT) 40%, var(--hoverB) 100%);
-  box-shadow:
-    0px 8px 14px var(--shadowCol),
-    inset 8px 8px 24px var(--insetCol),
-    inset -8px -8px 24px #0002;
-  opacity: 0;
-  transition:
-    opacity 500ms,
-    box-shadow 300ms,
-    transform 300ms;
-  z-index: -1;
-}
-
-.btn:hover::before {
-  opacity: 1;
-}
-
-/* hide the default input */
-.btn input[type="file"] {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-  width: 100%;
 }
 
 /* ============================================================
@@ -249,7 +143,7 @@ ll06-copyright {
 }
 .shadingBallBox {
   justify-content: space-between;
-  flex-direction: row;
+  flex-direction: row !important;
 }
 .shadingBall {
   width: 8rem;
@@ -304,38 +198,4 @@ ll06-copyright {
 
 .material:has(input[type="checkbox"]:checked) .checkIcon {
   opacity: 1;
-}
-
-.log {
-  width: 25em;
-  max-width: 25em;
-  overflow: hidden;
-}
-.log p {
-  font-size: x-small;
-  color: var(--textCol2);
-  text-shadow: 0 0 3px var(--shadowCol);
-}
-.log p .time {
-  font-size: 7px;
-  padding-right: 0.5rem;
-  color: var(--textCol2);
-}
-.log .error {
-  animation: pulse 1.5s ease-in-out infinite;
-  text-shadow:
-    0 0 5px var(--textCol2),
-    0 0 3px var(--textCol2);
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 1;
-  }
 }

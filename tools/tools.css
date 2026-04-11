@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+  --bgColT: #171733;
+  --bgColB: #3b153f;
+
+  --boxColT: #33337546;
+  --boxColB: #6e40724f;
+
+  --hoverT: #4444ff45;
+  --hoverB: #ec16ff77;
+
+  --textCol: #e2d4e7;
+  --textCol2: #c467cc;
+  --borderCol: #f0f0ff66;
+  --shadowCol: #1f1120aa;
+  --insetCol: #f0f0ff11;
+}
+* {
+  font-family: "Space Mono";
+  color: var(--textCol);
+  scroll-behavior: smooth;
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-color: var(--borderCol) #0000;
+  scrollbar-width: auto;
+}
+
+body,
+html {
+  background: linear-gradient(160deg, var(--bgColT) 30%, var(--bgColB) 100%);
+  width: 100%;
+  height: 100%;
+}
+main {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  height: 100%;
+}
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  user-select: none;
+}
+h4 {
+  text-transform: capitalize;
+  letter-spacing: 0.1rem;
+  user-select: none;
+}
+hr {
+  border: 1px solid var(--borderCol);
+}
+ll06-copyright {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+  font-size: small;
+  color: var(--textCol2);
+}
+
+/*Box Used For Most Stuff*/
+.box {
+  border-radius: 0.75rem;
+  background: linear-gradient(160deg, var(--boxColT) 30%, var(--boxColB) 100%);
+  border: 1px solid var(--borderCol);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  box-shadow:
+    0px 8px 14px var(--shadowCol),
+    inset 8px 8px 24px var(--insetCol),
+    inset -8px -8px 24px #0002;
+  transition: border 300ms, box-shadow 300ms, background 300ms;
+}
+
+.boxLink {
+  text-decoration: none;
+  transition: transform 300ms;
+}
+.boxLink:hover {
+  transform: scale(1.07);
+}
+.boxLink:hover > .box {
+  border: 1px solid var(--textCol2);
+  box-shadow:
+    0px 0px 14px var(--textCol2),
+    inset 8px 8px 24px var(--insetCol),
+    inset -8px -8px 24px #0002;
+  background: linear-gradient(160deg, var(--hoverT) 30%, var(--hoverB) 100%);
+}
+.infoText {
+  margin-top: auto;
+  color: var(--textCol2);
+}
+
+/* ============================================================
+    File Upload Buttons
+   ============================================================ */
+.btn {
+  font-size: small;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 3rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--borderCol);
+  background: linear-gradient(170deg, var(--hoverT) 40%, var(--hoverB) 100%);
+  cursor: pointer;
+  z-index: 0;
+  overflow: hidden;
+  box-shadow:
+    0px 4px 14px var(--shadowCol),
+    inset 8px 8px 24px var(--insetCol),
+    inset -8px -8px 24px #0002;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(170deg, var(--hoverT) 40%, var(--hoverB) 100%);
+  box-shadow:
+    0px 8px 14px var(--shadowCol),
+    inset 8px 8px 24px var(--insetCol),
+    inset -8px -8px 24px #0002;
+  opacity: 0;
+  transition:
+    opacity 500ms,
+    box-shadow 300ms,
+    transform 300ms;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+/* hide the default input */
+.btn input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.log {
+  width: 25em;
+  max-width: 25em;
+  overflow: hidden;
+}
+.log p {
+  font-size: x-small;
+  color: var(--textCol2);
+  text-shadow: 0 0 3px var(--shadowCol);
+}
+.log p .time {
+  font-size: 7px;
+  padding-right: 0.5rem;
+  color: var(--textCol2);
+}
+.log .error {
+  animation: pulse 1.5s ease-in-out infinite;
+  text-shadow:
+    0 0 5px var(--textCol2),
+    0 0 3px var(--textCol2);
+}
+
+.watermark {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 4vw;
+  opacity: 0.35;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
