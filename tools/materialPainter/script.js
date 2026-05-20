@@ -239,9 +239,13 @@ function populateColorListFromStorage(materialsJSON) {
   // Populate the color list
   colorList = Object.entries(materialsJSON.colors);
   populateColorList();
-  
+  saveColorListToStorage()
 }
-
+function saveColorListToStorage() {
+  const existing = loadFromStorage("colorVariants") || { isHex: true, variants: [], colors: {} };
+  existing.colors = Object.fromEntries(colorList.map(([name, hex]) => [name, hex.toUpperCase()]));
+  localStorage.setItem("colorVariants", JSON.stringify(existing));
+}
 function populateColorList() {
   colorVariantsList.innerHTML = ""; // clear existing
 
@@ -288,6 +292,7 @@ function removeColor() {
   log(`Color '${colorEditorName.value}' has been removed.`);
   populateColorList();
   resetColorEditor();
+  saveColorListToStorage()
 }
 
 function addColor() {
@@ -305,6 +310,7 @@ function addColor() {
   // Add or update material
   colorList.push([materialName, hex]);
   populateColorList();
+  saveColorListToStorage()
 }
 
 function updateColorEditorColors() {
